@@ -1,98 +1,59 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\Product;
 use Core\Controller;
 use Dompdf\Dompdf;
 
-class UserController extends Controller {
+class ProductController extends Controller {
     public function index() {
-        $users = User::all();
+        $data = Product::all();
 
-        $this->view('users.index', ['users' => $users]);
+        $this->view('products.index', ['products' => $data]);
     }
 
     public function create() {
-        $this->view('users.create', []);
+        $this->view('product.create', []);
     }
 
     public function store() {
-        $user = new User();
-        $user->name = $_REQUEST['name'];
-        $user->surname = $_REQUEST['surname'];
-        $user->birthdate = $_REQUEST['birthdate'];
-        $user->email = $_REQUEST['email'];
-        $user->insert();
+        $product = new Product();
+        $product->name = $_REQUEST['name'];
+        $product->insert();
 
-        header('Location:/user');
+        header('Location:/product');
     }
 
     public function show($args) {
-        // $id = (int) $args[0];
         list($id) = $args;
-        $user = User::find($id);
+        $product = Product::find($id);
 
-        $this->view('users.show', ["user" => $user]);
+        $this->view('product.show', ["product" => $product]);
     }
 
     public function edit($arguments) {
         $id = (int) $arguments[0];
-        $user = User::find($id);
+        $product = Product::find($id);
 
-        $this->view('users.edit', ["user" => $user]);
+        $this->view('product.edit', ["product" => $product]);
     }
 
     public function update() {
         $id = $_REQUEST['id'];
 
-        $user = User::find($id);
-        $user->name = $_REQUEST['name'];
-        $user->surname = $_REQUEST['surname'];
-        $user->birthdate = $_REQUEST['birthdate'];
-        $user->email = $_REQUEST['email'];
-        $user->save();
+        $product = Product::find($id);
+        $product->name = $_REQUEST['name'];
+        $product->save();
 
-        header('Location:/user');
+        header('Location:/product');
     }
 
     public function delete($arguments) {
         $id = (int) $arguments[0];
-        $user = User::find($id);
-        $user->delete();
+        $product = Product::find($id);
+        $product->delete();
 
-        header('Location:/user');
+        header('Location:/product');
     }
 
-    public function pdf() {
-        //iniciar buffer, para construir un response
-        ob_start();
-        $users = User::all();
-
-        $this->view('users.pdf', ['users' => $users]);
-
-        // Volcamos el contenido del buffer
-        // el response ya no va al navegador, va a $html
-        $html = ob_get_clean();
-
-        $dompdf = new DOMPDF();
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-        $dompdf->stream("usuarios.pdf", array("Attachment"=>0));
-    }
-
-    public function pdfsimple() {
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml('hello world');
-
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser
-        $dompdf->stream();
-    }
 }
