@@ -10,7 +10,9 @@
 
  <h1>EJEMPLO MVC</h1>
 
- <a href="/user">Usuarios</a>
+ <a href="/user">Usuarios</a> 
+ <?php /*  comentario      */ ?>
+ <!-- ergergergegeggeg-->
  <a href="/product">Productos</a>
 
 </body>
