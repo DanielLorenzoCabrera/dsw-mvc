@@ -11,11 +11,10 @@
     <h1>EJEMPLO MVC</h1>
 
     <a href="/user">Usuarios</a> 
-   
     <!-- 
         /user hace referencia al controlador UserControler.php, la aplicación interpreta automáticamente
         que estamos haciendo referencia al controlador User
--->
+    -->
     <a href="/product">Productos</a>
 
 </body>

@@ -44,6 +44,7 @@ class Product extends Model {
     public function save() {
         $db = Product::db();
         $stmt = $db->prepare('UPDATE product_types SET name = :name  WHERE id = :id');
+        $stmt->bindValue(':id', $this->id); // Esta funcion vincula el id de la consulta con un parámetro (o valor)
         $stmt->bindValue(':name', $this->name);
     
         return $stmt->execute();

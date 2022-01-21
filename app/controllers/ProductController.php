@@ -13,7 +13,7 @@ class ProductController extends Controller {
     }
 
     public function create() {
-        $this->view('product.create', []);
+        $this->view('products.create', []);
     }
 
     public function store() {
@@ -28,14 +28,14 @@ class ProductController extends Controller {
         list($id) = $args;
         $product = Product::find($id);
 
-        $this->view('product.show', ["product" => $product]);
+        $this->view('products.show', ["product" => $product]);
     }
 
     public function edit($arguments) {
         $id = (int) $arguments[0];
         $product = Product::find($id);
 
-        $this->view('product.edit', ["product" => $product]);
+        $this->view('products.edit', ["product" => $product]);
     }
 
     public function update() {

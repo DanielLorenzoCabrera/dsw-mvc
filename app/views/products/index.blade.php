@@ -4,7 +4,7 @@
     <h1>Lista de productos</h1>
     <p>
         <a href="/product/create" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Nuevo</a>
-        <a href="/user/pdf" class="btn btn-primary"><i class="far fa-file-pdf"></i> PDF</a>
+       <!-- <a href="/user/pdf" class="btn btn-primary"><i class="far fa-file-pdf"></i> PDF</a>-->
     </p>
     <table class="table table-striped table-hover table-sm">
         <tr>
